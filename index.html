@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <title>Bitcoin Price Predictor</title>
+    <meta name="description" content="Simple app to create a custom Bitcoin price prediction.">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/datepicker.css">
+  </head>
+  <body>
+  <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="inner cover">
+		  	<p class="lead">Simple app to create a custom Bitcoin price prediction.</p>
+			<hr></hr>
+			<div class="card text-white bg-secondary">
+				<div class="card-header">Bitcoin Prediction</div>
+				<div class="card-body">
+				<h4 class="card-title">Bitcoin price of <span id="bpiPrediction" class="badge badge-primary" style="font-size: 2rem;"></span></h4>
+					<p class="card-text">by <span class="badge badge-primary" id="endDate"></span>.
+					</p>
+				</div>
+				<div class="card-footer text-white">
+				<small>This prediction is based on starting date <span id="startDate" data-toggle="tooltip" data-placement="top" title=""></span>.</small>
+				</div>
+			</div>
+			<hr></hr>
+			<div class="card text-white bg-dark">
+				<div class="card-header">Current Status</div>
+				<div class="card-body">
+				<h4 class="card-title">Bitcoin's Price Index: <span id="currBpi" class="badge" style="font-size: 2rem;"></span></h4>
+				<p>Bitcoin's current price index is</br>
+					<span id="percDiff" class="badge" style="font-size: 2rem;"></span></br>
+					<span id="aheadOrBelow"></span> the prediction's price target.
+				</p>
+				</div>
+				<div class="card-footer text-white">
+				<small><span id="droppedOrIncreased"></span> on target for <span id="bpiPrediction2"></span>/Bitcoin
+		    </br> by the deadline ending in <span id="daysLeft" class="badge badge-primary"></span>. The starting price of the prediction was 
+			<span id="startingPrice" class="badge badge-primary"></span></small>
+				</div>
+			</div>
+			<p style="margin-top:10px;">
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createPrediction">
+					Create your own prediction.
+				</button>
+			</p>
+			<!-- Modal -->
+			<div class="modal fade" id="createPrediction" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">New Bitcoin Prediction</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						  <span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form name="newPredictionForm" method="get" action="">
+						<div class="modal-body">
+						<div class="input-group input-daterange">
+							<div class="input-group-addon">Starting Date:  </div>
+								<input type="text" id="startDate" name="startDate" class="form-control" size="10" minlength="10" maxlength="10" format="yyyy-mm-dd" value="" style="background-color: #fff;" required>
+							<div class="input-group-addon">📅</div>
+						</div>
+						<div class="input-group input-daterange">
+							<div class="input-group-addon">End Date:  </div>
+								<input type="text" id="endDate" name="endDate" class="form-control" size="10" minlength="10" maxlength="10" format="yyyy-mm-dd" value="" style="background-color: #fff;" required>
+							<div class="input-group-addon">📅</div>
+						</div>
+						<div class="input-group">
+							<div class="input-group-addon">Bitcoin USD Value:  </div>
+								<input type="text" id="bpiPrediction" name="bpiPrediction" class="form-control" value="" type="number" min="0.00" step="0.01" style="background-color: #fff;" required>
+							<div class="input-group-addon">💰</div>
+						</div>
+						</div>
+						<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			</div>
+		    <p style="margin-top: 2rem; font-size: 75%;">Open source <a href="https://github.com/diegorod/Bitcoin-Price-Predictor">project</a>, by <a href="https://twitter.com/ytDiego">@ytDiego</a>.</p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script src="js/prediction.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<!-- Global Site Tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-41697901-4"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments)};
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-41697901-4');
+	</script>
+  </body>
+</html>
