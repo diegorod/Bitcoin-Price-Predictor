@@ -39,6 +39,11 @@ function init(){
 	var query = window.location.search.substring(1);
 	var urlParams = window.getQueryString(query);
 	a = urlParams["bpiPrediction"];
+	//Check for no parameters
+	if (Object.keys(urlParams).length == 0){
+		//hide yo kids
+		$("#main").hide();
+	}
 	$("#bpiPrediction, #bpiPrediction2").text("$"+(Number(a)).formatMoney(2));
 	eDate = new Date(urlParams["endDate"]);
 	sDate = new Date(urlParams["startDate"]);
