@@ -18,34 +18,36 @@
 
         <div class="cover-container">
 
-          <div id="main" class="inner cover">
-		  	<p class="lead">Simple app to create a custom Bitcoin price prediction.</p>
-			<hr></hr>
-			<div class="card text-white bg-secondary">
-				<div class="card-header">Bitcoin Prediction</div>
-				<div class="card-body">
-				<h4 class="card-title">Bitcoin price of <span id="bpiPrediction" class="badge badge-primary" style="font-size: 2rem;"></span></h4>
-					<p class="card-text">by <span class="badge badge-primary" id="endDate"></span>.
+          <div class="inner cover">
+			<div id="main">
+				<p class="lead">Simple app to create a custom Bitcoin price prediction.</p>
+				<hr></hr>
+				<div class="card text-white bg-secondary">
+					<div class="card-header">Bitcoin Prediction</div>
+					<div class="card-body">
+					<h4 class="card-title">Bitcoin price of <span id="bpiPrediction" class="badge badge-primary" style="font-size: 2rem;"></span></h4>
+						<p class="card-text">by <span class="badge badge-primary" id="endDate"></span>.
+						</p>
+					</div>
+					<div class="card-footer text-white">
+					<small>This prediction is based on starting date <span id="startDate" data-toggle="tooltip" data-placement="top" title=""></span>.</small>
+					</div>
+				</div>
+				<hr></hr>
+				<div class="card text-white bg-dark">
+					<div class="card-header">Current Status</div>
+					<div class="card-body">
+					<h4 class="card-title">Bitcoin's Price Index: <span id="currBpi" class="badge" style="font-size: 2rem;"></span></h4>
+					<p>Bitcoin's current price index is</br>
+						<span id="percDiff" class="badge" style="font-size: 2rem;"></span></br>
+						<span id="aheadOrBelow"></span> the prediction's price target.
 					</p>
-				</div>
-				<div class="card-footer text-white">
-				<small>This prediction is based on starting date <span id="startDate" data-toggle="tooltip" data-placement="top" title=""></span>.</small>
-				</div>
-			</div>
-			<hr></hr>
-			<div class="card text-white bg-dark">
-				<div class="card-header">Current Status</div>
-				<div class="card-body">
-				<h4 class="card-title">Bitcoin's Price Index: <span id="currBpi" class="badge" style="font-size: 2rem;"></span></h4>
-				<p>Bitcoin's current price index is</br>
-					<span id="percDiff" class="badge" style="font-size: 2rem;"></span></br>
-					<span id="aheadOrBelow"></span> the prediction's price target.
-				</p>
-				</div>
-				<div class="card-footer text-white">
-				<small><span id="droppedOrIncreased"></span> on target for <span id="bpiPrediction2"></span>/Bitcoin
-		    </br> by the deadline ending in <span id="daysLeft" class="badge badge-primary"></span>. The starting price of the prediction was 
-			<span id="startingPrice" class="badge badge-primary"></span></small>
+					</div>
+					<div class="card-footer text-white">
+					<small><span id="droppedOrIncreased"></span> on target for <span id="bpiPrediction2"></span>/Bitcoin
+				</br> by the deadline ending in <span id="daysLeft" class="badge badge-primary"></span>. The starting price of the prediction was 
+				<span id="startingPrice" class="badge badge-primary"></span></small>
+					</div>
 				</div>
 			</div>
           </div>
