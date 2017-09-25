@@ -26,7 +26,8 @@ var n, //number of days left
 	p, //starting bpi
 	goalRate,
 	percDiff,
-	parPrice;
+	parPrice,
+	growthRate;
 
 var today = new Date(); //today
 today.setHours(0,0,0,0);
@@ -67,6 +68,25 @@ function init(){
 }
 init();
 
+function displayChartTable(){
+	var htmlStr = "";
+	var btcValue = parPrice;
+	for (i = 0; i < n; i++){
+		var d = new Date();
+		var r = i+1;
+		if (i != 0){
+			btcValue = (btcValue*growthRate)+btcValue;
+		}
+		d.setDate(today.getDate()+i);
+		htmlStr += "<tr>";
+		htmlStr += '<th scope="row">' + r + '</th>';
+		htmlStr += "<td>" + dateStr(d) + "</td>";
+		htmlStr += "<td>" + "$" + (Number(btcValue)).formatMoney(2) + "</td>";
+		htmlStr += "</tr>";
+	}
+	$("#dailyPriceTable tbody").html(htmlStr);
+}
+
 function dateStr(date){
 	return date.getUTCFullYear()+"-"+("0"+(date.getUTCMonth()+1)).slice(-2)+"-"+("0"+date.getUTCDate()).slice(-2);
 }
@@ -106,9 +126,10 @@ function getCurrBpi(){
 	$.getJSON(url)
 	.done(function ( json ) {
 		setCurrentBpi(json.bpi.USD.rate_float);
-		getGoalRate();
-		getParPrice();
+		getGoalRates();
 		getPercDiff();
+		//Display price table
+		displayChartTable();
 	}).fail(function (jqxhr, textStatus, error) {
 		var err = textStatus + ", " + error;
 		console.log( "Request Failed: " + err );
@@ -129,9 +150,17 @@ function setCurrentBpi(v){
 }
 
 //goalRate = LOG10(a/p)/(n+e/365)
-function getGoalRate(){
+function getGoalRates(){
 	var y = (n+e-1)/365;
 	goalRate = Math.log10(a/p)/(y);
+	console.log("Goal Rate: " + goalRate);
+	
+	//Get second date for % growth
+	getParPrice();
+	var e2 = e+1;
+	var parPrice2 = Math.pow(10, goalRate * (e2/365)) * p;
+	growthRate = (parPrice2 - parPrice)/parPrice;
+	console.log("Growth Rate: " + growthRate);
 	console.log("Goal Rate: " + goalRate);
 }
 

@@ -44,19 +44,35 @@
 					</p>
 					</div>
 					<div class="card-footer text-white">
-					<small><span id="droppedOrIncreased"></span> on target for <span id="bpiPrediction2"></span>/Bitcoin
-				</br> by the deadline ending in <span id="daysLeft" class="badge badge-primary"></span>. The starting price of the prediction was 
-				<span id="startingPrice" class="badge badge-primary"></span></small>
+						<small><span id="droppedOrIncreased"></span> on target for <span id="bpiPrediction2"></span>/Bitcoin
+						</br> by the deadline ending in <span id="daysLeft" class="badge badge-primary"></span>. The starting price of the prediction was 
+						<span id="startingPrice" class="badge badge-primary"></span></small>
+						<hr></hr>
+						<u style="cursor:pointer;"><h4 id="tableToggle" data-toggle="collapse" data-target="#collapseTable" aria-expanded="false" aria-controls="collapseTable">Prediction Price Table</h4></u>
+						<div class="collapse" id="collapseTable">
+							<table id="dailyPriceTable" class="table table-sm table-hover table-striped table-inverse text-left">
+								<thead>
+								<tr>
+								<th>#</th>
+								<th>Date</th>
+								<th>USD/BTC</th>
+								</tr>
+								</thead>
+								<tbody>
+									<!-- Daily Price Table -->
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
           </div>
 		  <footer>
-		  			<p style="margin-top:10px;">
-				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createPrediction">
-					Create your own prediction.
-				</button>
+			<p style="margin-top:10px;">
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createPrediction">
+				Create your own prediction.
+			</button>
 			</p>
 			<!-- Modal -->
 			<div class="modal fade" id="createPrediction" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -70,6 +86,7 @@
 					</div>
 					<form name="newPredictionForm" method="get" action="">
 						<div class="modal-body">
+						<p class="alert alert-info">Enter your own prediction below - or try <a class="text-dark" href="?startDate=2017-07-17&endDate=2020-07-17&bpiPrediction=500000">McAfee's</a>.</p>
 						<div class="input-group input-daterange">
 							<div class="input-group-addon">Starting Date:  </div>
 								<input type="text" id="startDate" name="startDate" class="form-control" size="10" minlength="10" maxlength="10" format="yyyy-mm-dd" value="" style="background-color: #fff;" required>
