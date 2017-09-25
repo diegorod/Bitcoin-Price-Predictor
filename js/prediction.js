@@ -139,27 +139,19 @@ function getGoalRate(){
 function getPercDiff(){
 	percDiff = ((c-parPrice)/parPrice)*100;
 	var badgeStr;
-	var dickMenuStr;
 	var aheadOrBelowStr = "ahead of";
 	parPriceHtml = '$' + (Number(parPrice)).formatMoney(2) + '</span>';
 	var droppedOrIncreasedStr = 'If the price dropped to <span class="badge badge-danger">' + parPriceHtml + ' it would still be'; 
 	$("#percDiff").text(Math.round(percDiff*100)/100 + "%");
-	if (percDiff > 0 && percDiff < 10){
-		badgeStr = "badge-warning";
-		dickMenuStr = "Maybe?";
-	}
-	else if (percDiff > 10){
+	if (percDiff > 0){
 		badgeStr = "badge-success";
-		dickMenuStr = "No!";
 	} else {
 		badgeStr = "badge-danger";
-		dickMenuStr = "Yes!";
 		aheadOrBelowStr = "below";
 		droppedOrIncreasedStr = 'The price needs to increase to <span class="badge badge-success">' + parPriceHtml + ' to be';
 	}
 	$("#percDiff").addClass(badgeStr);currBpi
 	$("#currBpi").addClass(badgeStr);
-	$("#isDickOnTheMenu").text(dickMenuStr);
 	$("#aheadOrBelow").text(aheadOrBelowStr);
 	$("#droppedOrIncreased").html(droppedOrIncreasedStr);
 	return percDiff;
