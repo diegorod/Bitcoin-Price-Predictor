@@ -76,16 +76,20 @@ init();
 function displayChartTable(){
 	var htmlStr = "";
 	var btcValue = parPrice;
-	var tempValue;
 	for (i = 0; i < n; i++){
 		var d = new Date();
 		var r = i+1;
-		tempValue = btcValue;
+		var nextValue;
+		var rowClass = '';
 		if (i != 0){
 			btcValue = (btcValue*growthRate)+btcValue;
 		}
+		nextValue = (btcValue*growthRate)+btcValue;
+		if (c > btcValue && c < nextValue){
+			rowClass = ' class="table-success text-dark" ';
+		}
 		d.setDate(today.getDate()+i);
-		htmlStr += "<tr>";
+		htmlStr += "<tr" + rowClass + ">";
 		htmlStr += '<th scope="row">' + r + '</th>';
 		htmlStr += "<td>" + dateStr(d) + "</td>";
 		htmlStr += "<td>" + "$" + (Number(btcValue)).formatMoney(2) + "</td>";
