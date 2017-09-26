@@ -32,8 +32,8 @@ var n, //number of days left
 var today = new Date(); //today
 today.setHours(0,0,0,0);
 var sDateStr, eDateStr;
-var sDate = new Date("7/17/17"); //start date of prediction
-var eDate = new Date("7/17/20"); //end date of prediction
+var sDate = new Date(); //start date of prediction
+var eDate = new Date(); //end date of prediction
 
 //Sample URL Parameters: ?bpiPrediction=500000&startDate=7-17-17&endDate=7-17-20
 function init(){
@@ -76,7 +76,7 @@ init();
 function displayChartTable(){
 	var htmlStr = "";
 	var btcValue = parPrice;
-	for (i = 0; i < n; i++){
+	for (i = 0; i < n+1; i++){
 		var d = new Date();
 		var r = i+1;
 		var nextValue;
@@ -109,7 +109,7 @@ function getDaysLeft(){
 		n = 0;
 		dayStr = " day";
 	}
-	$("#daysLeft").text(n + dayStr);
+	$("#daysLeft").text(n+1 + dayStr);
 	console.log("Number of Days Left: " + n);
 }
 
@@ -164,7 +164,7 @@ function setCurrentBpi(v){
 
 //goalRate = LOG10(a/p)/(n+e/365)
 function getGoalRates(){
-	var y = (n+e-1)/365;
+	var y = (n+e)/365;
 	goalRate = Math.log10(a/p)/(y);
 	console.log("Goal Rate: " + goalRate);
 	
