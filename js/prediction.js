@@ -37,13 +37,28 @@ var eDate = new Date("7/17/20"); //end date of prediction
 
 //Sample URL Parameters: ?bpiPrediction=500000&startDate=7-17-17&endDate=7-17-20
 function init(){
+	
+	//Datepicker init
+	$("#createPrediction #startDate").datepicker( {
+		format: 'yyyy-mm-dd',
+	});
+	var yDate = new Date();
+	yDate.setDate(today.getDate()-1);
+	$("#createPrediction #startDate").val(dateStr(yDate));
+	$("#createPrediction #endDate").datepicker( {
+		format: 'yyyy-mm-dd',
+	});
+	
+	//URL Parameters
 	var query = window.location.search.substring(1);
 	var urlParams = window.getQueryString(query);
 	a = urlParams["bpiPrediction"];
+	
 	//Check for no parameters
 	if (Object.keys(urlParams).length == 0){
 		//hide yo kids
 		$("#main").hide();
+		return false;
 	}
 	$("#bpiPrediction, #bpiPrediction2").text("$"+(Number(a)).formatMoney(2));
 	eDate = new Date(urlParams["endDate"]);
@@ -55,25 +70,17 @@ function init(){
 	getDaysElapsed();
 	getDaysLeft();
 	getStartingBpi();
-	//Datepicker init
-	$("#createPrediction #startDate").datepicker( {
-		format: 'yyyy-mm-dd',
-	});
-	var yDate = new Date();
-	yDate.setDate(today.getDate()-1);
-	$("#createPrediction #startDate").val(dateStr(yDate));
-	$("#createPrediction #endDate").datepicker( {
-		format: 'yyyy-mm-dd',
-	});
 }
 init();
 
 function displayChartTable(){
 	var htmlStr = "";
 	var btcValue = parPrice;
+	var tempValue;
 	for (i = 0; i < n; i++){
 		var d = new Date();
 		var r = i+1;
+		tempValue = btcValue;
 		if (i != 0){
 			btcValue = (btcValue*growthRate)+btcValue;
 		}
@@ -128,6 +135,8 @@ function getCurrBpi(){
 		setCurrentBpi(json.bpi.USD.rate_float);
 		getGoalRates();
 		getPercDiff();
+		//Display Main
+		$('#main').toggle();
 		//Display price table
 		displayChartTable();
 	}).fail(function (jqxhr, textStatus, error) {
