@@ -36,17 +36,17 @@
 				</div>
 				<hr></hr>
 				<div class="card text-white bg-dark">
-					<div class="card-header">Current Status</div>
+					<div id="statusHeader" class="card-header">Current Status</div>
 					<div class="card-body">
 					<h4 class="card-title">Bitcoin's Price Index: <span id="currBpi" class="badge" style="font-size: 2rem;"></span></h4>
-					<p>Bitcoin's current price index is</br>
+					<p><span id="statusTitle">Bitcoin's current price index is</span></br>
 						<span id="percDiff" class="badge" style="font-size: 2rem;"></span></br>
 						<span id="aheadOrBelow"></span> the prediction's price target.
 					</p>
 					</div>
-					<div class="card-footer text-white">
+					<div id="statusFooter" class="card-footer text-white">
 						<small><span id="droppedOrIncreased"></span> on target for <span id="bpiPrediction2"></span>/Bitcoin
-						</br> by the deadline ending in <span id="daysLeft" class="badge badge-primary"></span>.</small>
+						</br> by the deadline ending <span id="daysLeft" class="badge badge-primary"></span>.</small>
 						<hr></hr>
 						<u style="cursor:pointer;"><h4 id="tableToggle" data-toggle="collapse" data-target="#collapseTable" aria-expanded="false" aria-controls="collapseTable">Price Prediction Table</h4></u>
 						<div class="collapse" id="collapseTable">
@@ -99,7 +99,7 @@
 						</div>
 						<div class="input-group">
 							<div class="input-group-addon">Bitcoin USD Value:  </div>
-								<input type="number" id="bpiPrediction" name="bpiPrediction" class="form-control" value="" min="0.00" step="0.01" style="background-color: #fff;" required>
+								<input type="number" id="bpiPrediction" name="bpiPrediction" class="form-control" value="" min="0.00" step="1" style="background-color: #fff;" required>
 							<div class="input-group-addon">💰</div>
 						</div>
 						</div>

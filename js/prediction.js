@@ -24,6 +24,7 @@ var n, //number of days left
 	e, //number of days elapsed
 	c, //current bpi
 	p, //starting bpi
+	endBpi,
 	goalRate,
 	percDiff,
 	parPrice,
@@ -104,12 +105,13 @@ function dateStr(date){
 
 function getDaysLeft(){
 	n = dayDiff(today, eDate);
-	var dayStr = " days";
-	if (n < 1){
-		n = 0;
-		dayStr = " day";
+	var dayStr = "in " + n + " days";
+	if (n == 1){
+		dayStr = "in " + n + " day";
+	} else if( n == 0 )  {
+		dayStr = "today";
 	}
-	$("#daysLeft").text(n+1 + dayStr);
+	$("#daysLeft").text(dayStr);
 	console.log("Number of Days Left: " + n);
 }
 
@@ -125,12 +127,35 @@ function getStartingBpi(){
 	$.getJSON(url)
 	.done(function ( json ) {
 		setStartingBpi(json.bpi[sDateStr]);
-		getCurrBpi();
+		if (n < 0){
+			getEndBpi();
+		} else {
+			getCurrBpi();
+		}
 	}).fail(function (jqxhr, textStatus, error) {
 		var err = textStatus + ", " + error;
 		console.log( "Request Failed: " + err );
 	});
 }
+
+function getEndBpi(){
+	var url = "https://api.coindesk.com/v1/bpi/historical/close.json?start="+eDateStr+"&end="+eDateStr; 
+	$.getJSON(url)
+	.done(function ( json ) {
+		setEndBpi(json.bpi[eDateStr]);
+		displayEndStatus();
+		getEndPercDiff();
+		$('#main').toggle();
+	}).fail(function (jqxhr, textStatus, error) {
+		var err = textStatus + ", " + error;
+		console.log( "Request Failed: " + err );
+	});
+}
+
+function displayEndStatus(){
+	$('#statusHeader').text("Final Status");
+	$('#statusFooter').hide();
+}	
 
 function getCurrBpi(){
 	var url = "https://api.coindesk.com/v1/bpi/currentprice.json"; 
@@ -138,7 +163,7 @@ function getCurrBpi(){
 	.done(function ( json ) {
 		setCurrentBpi(json.bpi.USD.rate_float);
 		getGoalRates();
-		getPercDiff();
+		getPercDiff();		
 		//Display Main
 		$('#main').toggle();
 		//Display price table
@@ -147,6 +172,12 @@ function getCurrBpi(){
 		var err = textStatus + ", " + error;
 		console.log( "Request Failed: " + err );
 	});
+}
+
+function setEndBpi(v){
+	endBpi = Math.round(v *100)/100;
+	$("#currBpi").text("$"+(Number(endBpi)).formatMoney(2));
+	console.log("Ending Bpi: " + p);
 }
 
 function setStartingBpi(v){
@@ -175,6 +206,27 @@ function getGoalRates(){
 	growthRate = (parPrice2 - parPrice)/parPrice;
 	console.log("Growth Rate: " + growthRate);
 	console.log("Goal Rate: " + goalRate);
+}
+
+function getEndPercDiff(){
+	percDiff = ((endBpi-a)/a)*100;
+	var badgeStr;
+	var endPriceIndexStr = "Bitcoin's ending price index was ";
+	var aheadOrBelowStr = "";
+	parPriceHtml = '$' + (Number(parPrice)).formatMoney(2) + '</span>';
+	$("#percDiff").text(Math.round(percDiff*100)/100 + "%");
+	if (percDiff > 0){
+		badgeStr = "badge-success";
+		aheadOrBelowStr += "ahead of";
+	} else {
+		badgeStr = "badge-danger";
+		aheadOrBelowStr += "below";
+	}
+	$("#statusTitle").text(endPriceIndexStr);
+	$("#percDiff").addClass(badgeStr);currBpi
+	$("#currBpi").addClass(badgeStr);
+	$("#aheadOrBelow").text(aheadOrBelowStr);
+	return percDiff;
 }
 
 //percDiff = ((currBpi-parPrice)/parPrice)*100
