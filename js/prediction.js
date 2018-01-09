@@ -73,7 +73,6 @@ function init(){
 	getStartingBpi();
 }
 init();
-setInterval(init, 10000);
 
 function displayChartTable(){
 	var htmlStr = "";
